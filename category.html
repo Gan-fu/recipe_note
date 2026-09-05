@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title id="page-title">カテゴリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 id="category-name"></h1>
+
+<input type="text" id="search" class="search-box" placeholder="材料・調味料・作り方も検索できます">
+
+<select id="sort" class="search-box">
+  <option value="new">新着順</option>
+  <option value="az">五十音順（タイトル）</option>
+</select>
+
+<div id="recipe-container"></div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const category = params.get("cat");
+
+document.getElementById("category-name").innerText = category + "レシピ一覧";
+document.getElementById("page-title").innerText = category + "レシピ一覧";
+
+let categoryRecipes = [];
+let filteredRecipes = [];
+
+// JSON読み込み
+fetch("recipes.json")
+  .then(res => res.json())
+  .then(data => {
+    categoryRecipes = data.recipes.filter(r => r.category === category);
+    filteredRecipes = [...categoryRecipes];
+    applySort();
+    renderRecipes(filteredRecipes);
+  });
+
+// レシピ一覧描画
+function renderRecipes(list) {
+  const container = document.getElementById("recipe-container");
+  container.innerHTML = "";
+
+  list.forEach(r => {
+    container.innerHTML += `
+      <div class="card" onclick="location.href='recipe.html?id=${r.id}'">
+        <img src="${r.image}" loading="lazy">
+        <div>
+          <div class="card-title">${r.title}</div>
+          <div class="card-category">${r.category}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// 並び替え処理
+function applySort() {
+  const sortType = document.getElementById("sort").value;
+
+  if (sortType === "new") {
+    // 新着順（created_at の降順）
+    filteredRecipes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  } else if (sortType === "az") {
+    // 五十音順（タイトル）
+    filteredRecipes.sort((a, b) => a.title.localeCompare(b.title, "ja"));
+  }
+}
+
+// 検索機能
+document.getElementById("search").addEventListener("input", e => {
+  const keyword = e.target.value;
+
+  filteredRecipes = categoryRecipes.filter(r =>
+    r.title.includes(keyword) ||
+    r.memo.includes(keyword) ||
+    r.ingredients.some(i => i.includes(keyword)) ||
+    r.seasonings.some(s => s.includes(keyword)) ||
+    r.steps.some(step => step.includes(keyword))
+  );
+
+  applySort();
+  renderRecipes(filteredRecipes);
+});
+
+// 並び替えイベント
+document.getElementById("sort").addEventListener("change", () => {
+  applySort();
+  renderRecipes(filteredRecipes);
+});
+</script>
+
+<p><a href="index.html">← トップへ戻る</a></p>
+
+</body>
+</html>

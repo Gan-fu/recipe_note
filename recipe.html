@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>レシピ詳細</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 id="title"></h1>
+<img id="image" style="width:100%; border-radius:12px; margin-bottom:20px;" loading="lazy">
+
+<h2>材料</h2>
+<ul id="ingredients"></ul>
+
+<h2>調味料</h2>
+<ul id="seasonings"></ul>
+
+<h2>作り方</h2>
+<ol id="steps"></ol>
+
+<h2>メモ</h2>
+<p id="memo"></p>
+
+<p><a href="index.html">← トップへ戻る</a></p>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+fetch("recipes.json")
+  .then(res => res.json())
+  .then(data => {
+    const recipe = data.recipes.find(r => r.id === id);
+
+    document.getElementById("title").innerText = recipe.title;
+    document.getElementById("image").src = recipe.image;
+
+    recipe.ingredients.forEach(i => {
+      document.getElementById("ingredients").innerHTML += `<li>${i}</li>`;
+    });
+
+    recipe.seasonings.forEach(s => {
+      document.getElementById("seasonings").innerHTML += `<li>${s}</li>`;
+    });
+
+    recipe.steps.forEach(step => {
+      document.getElementById("steps").innerHTML += `<li>${step}</li>`;
+    });
+
+    document.getElementById("memo").innerText = recipe.memo;
+  });
+</script>
+
+</body>
+</html>

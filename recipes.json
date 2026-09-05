@@ -1,0 +1,26 @@
+{
+  "recipes": [
+    {
+      "id": "hitayakisoba",
+      "title": "日田焼きそば",
+      "category": "麺",
+      "image": "images/noodle/hitayakisoba.jpg",
+      "ingredients": ["焼きそば麺 1袋", "豚肉 適量", "キャベツ 適量"],
+      "seasonings": ["焼きそばソース 適量", "塩・こしょう 少々"],
+      "steps": ["豚肉と野菜を炒める", "麺を加える", "ソースで味付け"],
+      "memo": "紅しょうがを添えると美味しい",
+      "created_at": "2026-09-05"
+    },
+    {
+      "id": "kimchi_bacon_cream",
+      "title": "キムチベーコンクリームパスタ",
+      "category": "麺",
+      "image": "images/noodle/kimuchi.jpg",
+      "ingredients": ["パスタ 100g", "ベーコン 適量", "キムチ 適量"],
+      "seasonings": ["生クリーム 100ml", "塩 少々"],
+      "steps": ["ベーコンを炒める", "キムチを加える", "生クリームを入れる", "茹でたパスタと和える"],
+      "memo": "辛さはキムチの量で調整",
+      "created_at": "2024-03-26"
+    }
+  ]
+}
