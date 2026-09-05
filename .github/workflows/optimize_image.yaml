@@ -1,0 +1,24 @@
+name: Optimize Images
+
+on:
+  push:
+    paths:
+      - "images/**"
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Convert images to WebP
+        uses: calibreapp/image-actions@v1
+        with:
+          formats: webp
+          quality: 80
+
+      - name: Commit optimized images
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Optimize images to WebP"
