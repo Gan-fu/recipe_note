@@ -110,3 +110,10 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Add recipe from issue"
+      
+      - name: Close issue
+        uses: peter-evans/close-issue@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: "レシピ登録が完了したため、このIssueをクローズします。"
+
