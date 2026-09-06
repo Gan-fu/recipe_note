@@ -67,7 +67,10 @@ jobs:
           new_id = f"{title_romaji}-{created_date}"
 
           # ---- 画像URL抽出 ----
-          match = re.search(r"https://user-images\.githubusercontent\.com/[^\s)]+", body)
+          match = re.search(
+              r"(https://user-images\.githubusercontent\.com/[^\s\"'>]+|https://github\.com/user-attachments/assets/[^\s\"'>]+)",
+              body
+          )
           image_url = match.group(0) if match else None
 
           # ---- 画像保存処理 ----
