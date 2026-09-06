@@ -23,7 +23,7 @@ jobs:
         id: convert
         run: |
           python3 - << 'EOF'
-          import json, re, sys
+          import json, re, os, unicodedata, subprocess
           from datetime import datetime
 
           body = """${{ steps.extract.outputs.BODY }}"""
@@ -33,19 +33,61 @@ jobs:
               match = re.search(pattern, body)
               return match.group(1).strip() if match else ""
 
+          # ---- フィールド抽出 ----
           title = get_field("レシピ名")
-          category = get_field("カテゴリ")
+          category_jp = get_field("カテゴリ")
           ingredients = get_field("材料（1行ずつ）").split("\n")
           seasonings = get_field("調味料（1行ずつ）").split("\n")
           steps = get_field("作り方（1行ずつ）").split("\n")
           memo = get_field("メモ")
-          image = get_field("画像ファイル名（images/ に置く）")
 
+          # ---- カテゴリ変換 ----
+          category_map = {
+              "主菜": "main_dish",
+              "冷たい副菜": "side_dish_cold",
+              "温かい副菜": "side_dish_hot",
+              "麺": "noodle",
+              "パン": "bread",
+              "ご飯": "rice",
+              "お菓子": "sweets"
+          }
+          category_en = category_map.get(category_jp, "others")
+
+          # ---- ローマ字化 ----
+          def to_romaji(text):
+              normalized = unicodedata.normalize("NFKD", text)
+              return "".join([c for c in normalized if unicodedata.category(c) != "Mn"]).lower()
+
+          title_romaji = to_romaji(title).replace(" ", "_")
+
+          # ---- 日時 ----
+          timestamp = datetime.now().strftime("%Y%m%d-%H%M")
+
+          # ---- 画像URL抽出 ----
+          match = re.search(r"https://user-images\.githubusercontent\.com/[^\s)]+", body)
+          image_url = match.group(0) if match else None
+
+          # ---- 画像保存処理 ----
+          if image_url:
+              save_dir = f"images/{category_en}"
+              os.makedirs(save_dir, exist_ok=True)
+
+              filename_png = f"{title_romaji}-{timestamp}.png"
+              filepath_png = f"{save_dir}/{filename_png}"
+
+              subprocess.run(["curl", "-L", image_url, "-o", filepath_png], check=True)
+
+              filename_webp = f"{title_romaji}-{timestamp}.webp"
+              image_path = f"{save_dir}/{filename_webp}"
+          else:
+              image_path = ""
+
+          # ---- JSON作成 ----
           new_recipe = {
               "id": re.sub(r'[^a-zA-Z0-9]', '', title.lower()),
               "title": title,
-              "category": category,
-              "image": f"images/{image}",
+              "category": category_en,
+              "image": image_path,
               "ingredients": [i for i in ingredients if i.strip()],
               "seasonings": [s for s in seasonings if s.strip()],
               "steps": [s for s in steps if s.strip()],
