@@ -3,7 +3,7 @@
     {
       "id": "hitayakisoba",
       "title": "日田焼きそば",
-      "category": "麺",
+      "category": "noodle",
       "image": "images/noodle/hitayakisoba.webp",
       "ingredients": [
         "焼きそば麺 1袋",
@@ -29,7 +29,7 @@
     {
       "id": "kimchi_bacon_cream",
       "title": "キムチベーコンクリームパスタ",
-      "category": "麺",
+      "category": "noodle",
       "image": "images/noodle/kimuchi.webp",
       "ingredients": [
         "パスタ",
@@ -54,9 +54,9 @@
       "created_at": "2024-03-26"
     },
     {
-      "id": "",
+      "id": "hamutamagosand",
       "title": "ハムタマゴサンド",
-      "category": "パン",
+      "category": "bread",
       "image": "images/bread/hamutama_sand.webp",
       "ingredients": [
         "食パン8枚切り",
@@ -76,9 +76,9 @@
       "created_at": "2026-09-06"
     },
     {
-      "id": "",
+      "id": "mekabuhiyayakko",
       "title": "めかぶ冷奴",
-      "category": "冷たい副菜",
+      "category": "side_dish_cold",
       "image": "images/side_dish_cold/mekabuhiyayakko.webp",
       "ingredients": [
         "絹ごし豆腐",
@@ -95,9 +95,9 @@
       "created_at": "2026-09-06"
     },
     {
-      "id": "",
+      "id": "nasuhamu",
       "title": "ナスのハム挟み焼き",
-      "category": "温かい副菜",
+      "category": "side_dish_hot",
       "image": "images/side_dish_hot/nasuhamu.webp",
       "ingredients": [
         "ナス",
@@ -114,9 +114,9 @@
       "created_at": "2026-09-06"
     },
     {
-      "id": "",
+      "id": "butashouyumayo",
       "title": "豚肉とブロッコリーの醤油マヨ炒め",
-      "category": "主菜",
+      "category": "main_dish",
       "image": "images/main_dish/buta_shouyumayo.webp",
       "ingredients": [
         "豚肉（豚こま）",
@@ -137,7 +137,7 @@
       "created_at": "2026-09-06"
     },
     {
-      "id": "",
+      "id": "kanikama",
       "title": "カニカマコールスロー",
       "category": "side_dish_cold",
       "image": "images/side_dish_cold/kanikama.webp",
