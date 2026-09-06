@@ -116,6 +116,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Add recipe from issue"
+          add_untracked_files: true
       
       - name: Close issue
         uses: peter-evans/close-issue@v2
