@@ -40,7 +40,8 @@ jobs:
             thumb_output="$thumb_dir/${base}-thumb.webp"
 
             # サムネイル生成（300px）
-            magick "$output" -resize 300x300 "$thumb_output"
+            convert "$output" -resize 300x300 "$thumb_output"
+                
           done
 
       - name: Commit optimized images
