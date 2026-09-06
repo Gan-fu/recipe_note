@@ -13,10 +13,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Convert images to WebP
-        uses: calibreapp/image-actions@v1
-        with:
-          formats: webp
-          quality: 80
+        run: |
+          for file in images/*.{jpg,jpeg,png}; do
+            [ -e "$file" ] || continue
+            cwebp -q 80 "$file" -o "${file%.*}.webp"
+          done
 
       - name: Commit optimized images
         uses: stefanzweifel/git-auto-commit-action@v4
