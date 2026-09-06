@@ -12,14 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Convert images to WebP
+      - name: Convert images to WebP and delete originals
         run: |
+          shopt -s nullglob
           for file in images/*.{jpg,jpeg,png}; do
-            [ -e "$file" ] || continue
-            cwebp -q 80 "$file" -o "${file%.*}.webp"
+            # WebP出力先
+            output="${file%.*}.webp"
+
+            # WebP変換（画質80）
+            cwebp -q 80 "$file" -o "$output"
+
+            # 元画像削除
+            rm "$file"
           done
 
       - name: Commit optimized images
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Optimize images to WebP"
+          commit_message: "Optimize images to WebP and remove originals"
