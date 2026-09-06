@@ -78,7 +78,7 @@
     {
       "id": "",
       "title": "めかぶ冷奴",
-      "category": "side_dish_cold",
+      "category": "冷たい副菜",
       "image": "",
       "ingredients": [
         "絹ごし豆腐",
@@ -97,7 +97,7 @@
     {
       "id": "",
       "title": "ナスのハム挟み焼き",
-      "category": "side_dish_hot",
+      "category": "温かい副菜",
       "image": "images/side_dish_hot/nasuhamu.webp",
       "ingredients": [
         "ナス",
