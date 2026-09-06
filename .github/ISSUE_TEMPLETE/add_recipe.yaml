@@ -1,0 +1,68 @@
+name: 新しいレシピを追加
+description: スマートフォンからレシピを追加できます
+title: "[レシピ追加] タイトルを入力してください"
+labels: ["add-recipe"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: レシピ名
+      placeholder: 例：ペペロンチーノ
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: カテゴリ
+      options:
+        - 麺
+        - 主菜
+        - 副菜
+        - パン
+        - ご飯
+    validations:
+      required: true
+
+  - type: textarea
+    id: ingredients
+    attributes:
+      label: 材料（1行ずつ）
+      placeholder: |
+        パスタ 100g
+        にんにく 2片
+    validations:
+      required: true
+
+  - type: textarea
+    id: seasonings
+    attributes:
+      label: 調味料（1行ずつ）
+      placeholder: |
+        塩 少々
+        唐辛子 適量
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 作り方（1行ずつ）
+      placeholder: |
+        にんにくを炒める
+        唐辛子を加える
+        パスタと和える
+    validations:
+      required: true
+
+  - type: textarea
+    id: memo
+    attributes:
+      label: メモ
+      placeholder: 例：焦がさないように弱火で
+
+  - type: textarea
+    id: image
+    attributes:
+      label: 画像ファイル名（images/ に置く）
+      placeholder: 例：peperoncino.webp
+    validations:
+      required: true

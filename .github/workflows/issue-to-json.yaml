@@ -1,0 +1,70 @@
+name: Issue to JSON
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add_recipe:
+    if: contains(github.event.issue.labels.*.name, 'add-recipe')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Extract issue body
+        id: extract
+        run: |
+          echo "BODY<<EOF" >> $GITHUB_OUTPUT
+          echo "${{ github.event.issue.body }}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Convert issue to JSON entry
+        id: convert
+        run: |
+          python3 - << 'EOF'
+          import json, re, sys
+          from datetime import datetime
+
+          body = """${{ steps.extract.outputs.BODY }}"""
+
+          def get_field(label):
+              pattern = rf"{label}\n([\s\S]*?)(\n\n|$)"
+              match = re.search(pattern, body)
+              return match.group(1).strip() if match else ""
+
+          title = get_field("レシピ名")
+          category = get_field("カテゴリ")
+          ingredients = get_field("材料（1行ずつ）").split("\n")
+          seasonings = get_field("調味料（1行ずつ）").split("\n")
+          steps = get_field("作り方（1行ずつ）").split("\n")
+          memo = get_field("メモ")
+          image = get_field("画像ファイル名（images/ に置く）")
+
+          new_recipe = {
+              "id": re.sub(r'[^a-zA-Z0-9]', '', title.lower()),
+              "title": title,
+              "category": category,
+              "image": f"images/{image}",
+              "ingredients": [i for i in ingredients if i.strip()],
+              "seasonings": [s for s in seasonings if s.strip()],
+              "steps": [s for s in steps if s.strip()],
+              "memo": memo,
+              "created_at": datetime.now().strftime("%Y-%m-%d")
+          }
+
+          with open("recipes.json", "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          data["recipes"].append(new_recipe)
+
+          with open("recipes.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          print("レシピを追加しました:", new_recipe["title"])
+          EOF
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Add recipe from issue"
