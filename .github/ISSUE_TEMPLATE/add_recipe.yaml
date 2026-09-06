@@ -16,11 +16,13 @@ body:
     attributes:
       label: カテゴリ
       options:
-        - 麺
         - 主菜
-        - 副菜
+        - 冷たい副菜
+        - 温かい副菜
         - パン
         - ご飯
+        - 麺
+        - お菓子
     validations:
       required: true
 
@@ -62,7 +64,7 @@ body:
   - type: textarea
     id: image
     attributes:
-      label: 画像ファイル名（images/ に置く）
+      label: 画像ファイル
       placeholder: 例：peperoncino.webp
     validations:
       required: true

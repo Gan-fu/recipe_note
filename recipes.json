@@ -4,7 +4,7 @@
       "id": "hitayakisoba",
       "title": "日田焼きそば",
       "category": "麺",
-      "image": "images/noodle/hitayakisoba.jpg",
+      "image": "images/noodle/hitayakisoba.webp",
       "ingredients": [
         "焼きそば麺 1袋",
         "豚肉",
@@ -30,7 +30,7 @@
       "id": "kimchi_bacon_cream",
       "title": "キムチベーコンクリームパスタ",
       "category": "麺",
-      "image": "images/noodle/kimuchi.jpg",
+      "image": "images/noodle/kimuchi.webp",
       "ingredients": [
         "パスタ",
         "ベーコン",
@@ -78,7 +78,7 @@
     {
       "id": "",
       "title": "めかぶ冷奴",
-      "category": "noodle",
+      "category": "side_dish_cold",
       "image": "",
       "ingredients": [
         "絹ごし豆腐",
