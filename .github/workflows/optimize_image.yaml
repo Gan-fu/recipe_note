@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Convert images to WebP and delete originals
+      - name: Convert images to WebP and delete originals (recursive)
         run: |
-          shopt -s nullglob
-          for file in images/*.{jpg,jpeg,png}; do
-            # WebP出力先
+          # jpg/jpeg/png を再帰的に検索
+          find images -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read file; do
+            # 出力先（拡張子だけ変える）
             output="${file%.*}.webp"
 
             # WebP変換（画質80）
