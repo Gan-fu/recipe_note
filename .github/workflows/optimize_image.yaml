@@ -12,20 +12,38 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install WebP tools
+      - name: Install WebP and ImageMagick
         run: |
           sudo apt-get update
-          sudo apt-get install -y webp
+          sudo apt-get install -y webp imagemagick
 
-      - name: Convert images to WebP and delete originals (recursive)
+      - name: Convert images to WebP, delete originals, and generate thumbnails
         run: |
+          # 画像を再帰的に検索
           find images -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read file; do
+            # WebP 出力先
             output="${file%.*}.webp"
+
+            # WebP 変換
             cwebp -q 80 "$file" -o "$output"
+
+            # 元画像削除
             rm "$file"
+
+            # サムネイル保存先フォルダ
+            dir=$(dirname "$file")
+            thumb_dir="$dir/thumbs"
+            mkdir -p "$thumb_dir"
+
+            # サムネイルファイル名
+            base=$(basename "${file%.*}")
+            thumb_output="$thumb_dir/${base}-thumb.webp"
+
+            # サムネイル生成（300px）
+            magick "$output" -resize 300x300 "$thumb_output"
           done
 
       - name: Commit optimized images
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Optimize images to WebP and remove originals"
+          commit_message: "Optimize images to WebP, remove originals, and generate thumbnails"
