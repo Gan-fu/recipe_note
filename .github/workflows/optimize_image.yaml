@@ -17,34 +17,37 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y webp imagemagick
 
-      - name: Convert images to WebP, delete originals, and generate thumbnails
+      - name: Resize, convert to WebP, delete originals, and generate thumbnails
         run: |
-          # 画像を再帰的に検索
+          # JPG/PNG を再帰的に検索
           find images -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read file; do
-            # WebP 出力先
+
+            # リサイズ後の一時ファイル
+            resized="${file%.*}-resized.jpg"
+
+            # ---- ① リサイズ（長辺1200px） ----
+            convert "$file" -resize 1200x1200\> "$resized"
+
+            # ---- ② WebP 変換 ----
             output="${file%.*}.webp"
+            cwebp -q 80 "$resized" -o "$output"
 
-            # WebP 変換
-            cwebp -q 80 "$file" -o "$output"
-
-            # 元画像削除
+            # ---- ③ 元画像と一時ファイル削除 ----
             rm "$file"
+            rm "$resized"
 
-            # サムネイル保存先フォルダ
+            # ---- ④ サムネイル生成（300px） ----
             dir=$(dirname "$file")
             thumb_dir="$dir/thumbs"
             mkdir -p "$thumb_dir"
 
-            # サムネイルファイル名
             base=$(basename "${file%.*}")
             thumb_output="$thumb_dir/${base}-thumb.webp"
 
-            # サムネイル生成（300px）
             convert "$output" -resize 300x300 "$thumb_output"
-                
           done
 
       - name: Commit optimized images
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Optimize images to WebP, remove originals, and generate thumbnails"
+          commit_message: "Resize images, convert to WebP, and generate thumbnails"
