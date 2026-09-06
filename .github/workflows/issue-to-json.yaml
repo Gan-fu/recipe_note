@@ -35,7 +35,7 @@ jobs:
 
           # ---- フィールド抽出 ----
           title = get_field("レシピ名")
-          category_jp = get_field("カテゴリ")
+          category_jp = get_field("カテゴリ").strip()
           ingredients = get_field("材料（1行ずつ）").split("\n")
           seasonings = get_field("調味料（1行ずつ）").split("\n")
           steps = get_field("作り方（1行ずつ）").split("\n")
@@ -56,12 +56,15 @@ jobs:
           # ---- ローマ字化 ----
           def to_romaji(text):
               normalized = unicodedata.normalize("NFKD", text)
-              return "".join([c for c in normalized if unicodedata.category(c) != "Mn"]).lower()
+              return "".join([c for c in normalized if unicodedata.category(c) != "Mn"]).lower().replace(" ", "_")
 
-          title_romaji = to_romaji(title).replace(" ", "_")
+          title_romaji = to_romaji(title)
 
-          # ---- 日時 ----
-          timestamp = datetime.now().strftime("%Y%m%d-%H%M")
+          # ---- 日付（ID用） ----
+          created_date = datetime.now().strftime("%Y%m%d")
+
+          # ---- ID生成（ローマ字＋日付） ----
+          new_id = f"{title_romaji}-{created_date}"
 
           # ---- 画像URL抽出 ----
           match = re.search(r"https://user-images\.githubusercontent\.com/[^\s)]+", body)
@@ -72,19 +75,18 @@ jobs:
               save_dir = f"images/{category_en}"
               os.makedirs(save_dir, exist_ok=True)
 
-              filename_png = f"{title_romaji}-{timestamp}.png"
-              filepath_png = f"{save_dir}/{filename_png}"
-
-              subprocess.run(["curl", "-L", image_url, "-o", filepath_png], check=True)
-
-              filename_webp = f"{title_romaji}-{timestamp}.webp"
+              filename_webp = f"{title_romaji}-{created_date}.webp"
               image_path = f"{save_dir}/{filename_webp}"
+
+              # PNG → WebP は optimize_image.yml がやるのでここではダウンロードのみ
+              filepath_png = f"{save_dir}/{title_romaji}-{created_date}.png"
+              subprocess.run(["curl", "-L", image_url, "-o", filepath_png], check=True)
           else:
               image_path = ""
 
           # ---- JSON作成 ----
           new_recipe = {
-              "id": re.sub(r'[^a-zA-Z0-9]', '', title.lower()),
+              "id": new_id,
               "title": title,
               "category": category_en,
               "image": image_path,
@@ -95,6 +97,7 @@ jobs:
               "created_at": datetime.now().strftime("%Y-%m-%d")
           }
 
+          # ---- JSON追記 ----
           with open("recipes.json", "r", encoding="utf-8") as f:
               data = json.load(f)
 
@@ -116,4 +119,3 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: "レシピ登録が完了したため、このIssueをクローズします。"
-
