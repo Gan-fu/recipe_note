@@ -74,6 +74,25 @@
       ],
       "memo": "",
       "created_at": "2026-09-06"
+    },
+    {
+      "id": "",
+      "title": "めかぶ冷奴",
+      "category": "noodle",
+      "image": "",
+      "ingredients": [
+        "絹ごし豆腐",
+        "めかぶパック",
+        "鰹節"
+      ],
+      "seasonings": [
+        "めんつゆ"
+      ],
+      "steps": [
+        "全部混ぜる"
+      ],
+      "memo": "味変でわさびを入れるとよい",
+      "created_at": "2026-09-06"
     }
   ]
 }
