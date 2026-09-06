@@ -93,6 +93,25 @@
       ],
       "memo": "味変でわさびを入れるとよい",
       "created_at": "2026-09-06"
+    },
+    {
+      "id": "",
+      "title": "ナスのハム挟み焼き",
+      "category": "side_dish_hot",
+      "image": "images/side_dish_hot/nasuhamu.webp",
+      "ingredients": [
+        "ナス",
+        "ハム"
+      ],
+      "seasonings": [
+        "醬油",
+        "酒"
+      ],
+      "steps": [
+        ""
+      ],
+      "memo": "",
+      "created_at": "2026-09-06"
     }
   ]
 }
