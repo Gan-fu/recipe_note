@@ -19,11 +19,30 @@
 <div id="recipe-container"></div>
 
 <script>
+function getThumb(imagePath) {
+  const parts = imagePath.split("/");
+  const category = parts[1];
+  const filename = parts[2].replace(".webp", "");
+  return `images/${category}/thumbs/${filename}-thumb.webp`;
+}
+
+const categoryMap = {
+  main_dish: "主菜",
+  side_dish_cold: "冷たい副菜",
+  side_dish_hot: "温かい副菜",
+  noodle: "麺",
+  bread: "パン",
+  rice: "ご飯",
+  sweets: "お菓子"
+};
+
 const params = new URLSearchParams(location.search);
 const category = params.get("cat");
 
-document.getElementById("category-name").innerText = category + "レシピ一覧";
-document.getElementById("page-title").innerText = category + "レシピ一覧";
+document.getElementById("category-name").innerText =
+  categoryMap[category] + "レシピ一覧";
+document.getElementById("page-title").innerText =
+  categoryMap[category] + "レシピ一覧";
 
 let categoryRecipes = [];
 let filteredRecipes = [];
@@ -46,7 +65,7 @@ function renderRecipes(list) {
   list.forEach(r => {
     container.innerHTML += `
       <div class="card" onclick="location.href='recipe.html?id=${r.id}'">
-        <img src="${r.image}" loading="lazy">
+        <img src="${getThumb(r.image)}" loading="lazy">
         <div>
           <div class="card-title">${r.title}</div>
           <div class="card-category">${r.category}</div>
