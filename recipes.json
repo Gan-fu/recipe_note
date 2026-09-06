@@ -135,6 +135,26 @@
       ],
       "memo": "醤油の代わりにポン酢でもいい",
       "created_at": "2026-09-06"
+    },
+    {
+      "id": "",
+      "title": "カニカマコールスロー",
+      "category": "side_dish_cold",
+      "image": "",
+      "ingredients": [
+        "キャベツ",
+        "カニカマ"
+      ],
+      "seasonings": [
+        "マヨネーズ",
+        "塩胡椒",
+        "醤油"
+      ],
+      "steps": [
+        "和える"
+      ],
+      "memo": "_No response_",
+      "created_at": "2026-09-06"
     }
   ]
 }
