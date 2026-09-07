@@ -11,6 +11,15 @@ body:
     validations:
       required: true
 
+  - type: input
+    id: recipe_id
+    attributes:
+      label: ID（英語で入力）
+      description: レシピのURLや画像ファイル名に使われます。英語・数字・アンダーバーのみ。
+      placeholder: 例：kanikama_coleslaw
+    validations:
+      required: true
+
   - type: dropdown
     id: category
     attributes:

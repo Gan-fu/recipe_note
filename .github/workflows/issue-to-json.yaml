@@ -36,7 +36,7 @@ jobs:
           # ---- フィールド抽出 ----
           title = get_field("レシピ名")
           category_jp = get_field("カテゴリ").strip()
-          recipe_id = get_field("ID").strip()   # ← 追加
+          recipe_id = get_field("recipe_id").strip()   # ← 追加
           ingredients = get_field("材料（1行ずつ）").split("\n")
           seasonings = get_field("調味料（1行ずつ）").split("\n")
           steps = get_field("作り方（1行ずつ）").split("\n")
