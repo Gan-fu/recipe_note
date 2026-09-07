@@ -54,13 +54,6 @@ jobs:
           }
           category_en = category_map.get(category_jp, "others")
 
-          # ---- ローマ字化 ----
-          def to_romaji(text):
-              normalized = unicodedata.normalize("NFKD", text)
-              return "".join([c for c in normalized if unicodedata.category(c) != "Mn"]).lower().replace(" ", "_")
-
-          title_romaji = to_romaji(title)
-
           # ---- 日付（ID用） ----
           created_date = datetime.now().strftime("%Y%m%d")
 
@@ -76,11 +69,11 @@ jobs:
               save_dir = f"images/{category_en}"
               os.makedirs(save_dir, exist_ok=True)
 
-              filename_webp = f"{title_romaji}-{created_date}.webp"
+              filename_webp = f"{recipe_id}-{created_date}.webp"
               image_path = f"{save_dir}/{filename_webp}"
 
               # PNG → WebP は optimize_image.yml がやるのでここではダウンロードのみ
-              filepath_png = f"{save_dir}/{title_romaji}-{created_date}.png"
+              filepath_png = f"{save_dir}/{recipe_id}-{created_date}.png"
               subprocess.run(["curl", "-L", image_url, "-o", filepath_png], check=True)
           else:
               image_path = ""
