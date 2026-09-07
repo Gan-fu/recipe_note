@@ -1,10 +1,9 @@
-name: Optimize Images
+name: Optimize images
 
 on:
-  push:
-    branches:
-      - main
-
+ workflow_call:
+ paths:
+      - "images/**"
 
 jobs:
   optimize:
