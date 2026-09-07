@@ -1,10 +1,11 @@
 name: Optimize images
 
 on:
+  workflow_dispatch:
+  workflow_call:
   push:
     paths:
       - "images/**"
-  workflow_call:
 
 jobs:
   optimize:
