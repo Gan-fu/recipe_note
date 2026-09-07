@@ -36,6 +36,7 @@ jobs:
           # ---- フィールド抽出 ----
           title = get_field("レシピ名")
           category_jp = get_field("カテゴリ").strip()
+          recipe_id = get_field("ID").strip()   # ← 追加
           ingredients = get_field("材料（1行ずつ）").split("\n")
           seasonings = get_field("調味料（1行ずつ）").split("\n")
           steps = get_field("作り方（1行ずつ）").split("\n")
@@ -63,9 +64,6 @@ jobs:
           # ---- 日付（ID用） ----
           created_date = datetime.now().strftime("%Y%m%d")
 
-          # ---- ID生成（ローマ字＋日付） ----
-          new_id = f"{title_romaji}-{created_date}"
-
           # ---- 画像URL抽出 ----
           match = re.search(
               r"(https://user-images\.githubusercontent\.com/[^\s\"'>]+|https://github\.com/user-attachments/assets/[^\s\"'>]+)",
@@ -89,7 +87,7 @@ jobs:
 
           # ---- JSON作成 ----
           new_recipe = {
-              "id": new_id,
+              "id": recipe_id,
               "title": title,
               "category": category_en,
               "image": image_path,
