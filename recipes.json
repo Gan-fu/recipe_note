@@ -392,6 +392,26 @@
       ],
       "memo": "フライパン一つでつくる\n仕上げにブラックペッパー",
       "created_at": "2026-09-07"
+    },
+    {
+      "id": "wakameshirasuae",
+      "title": "わかめとしらすの和え物",
+      "category": "side_dish_cold",
+      "image": "images/side_dish_cold/wakameshirasuae-20260907.webp",
+      "ingredients": [
+        "わかめ",
+        "しらす",
+        "きゅうり"
+      ],
+      "seasonings": [
+        "カンタン酢",
+        "醤油"
+      ],
+      "steps": [
+        "和える"
+      ],
+      "memo": "なし",
+      "created_at": "2026-09-07"
     }
   ]
 }
