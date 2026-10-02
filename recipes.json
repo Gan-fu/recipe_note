@@ -535,6 +535,28 @@
       ],
       "memo": "_No response_",
       "created_at": "2026-10-02"
+    },
+    {
+      "id": "torioba",
+      "title": "鶏の大葉炒め",
+      "category": "main_dish",
+      "image": "images/main_dish/torioba-20261002.webp",
+      "ingredients": [
+        "鶏肉",
+        "玉ねぎ",
+        "大葉"
+      ],
+      "seasonings": [
+        "塩胡椒",
+        "醤油",
+        "酒"
+      ],
+      "steps": [
+        "炒める",
+        "最後に火を消して大葉を加えて余熱で炒める"
+      ],
+      "memo": "_No response_",
+      "created_at": "2026-10-02"
     }
   ]
 }
