@@ -464,6 +464,29 @@
       ],
       "memo": "_No response_",
       "created_at": "2026-10-02"
+    },
+    {
+      "id": "toriterini",
+      "title": "鶏の照り煮",
+      "category": "main_dish",
+      "image": "images/main_dish/toriterini-20261002.webp",
+      "ingredients": [
+        "鶏もも肉",
+        "玉ねぎ",
+        "ねぎ"
+      ],
+      "seasonings": [
+        "醤油",
+        "砂糖",
+        "酒",
+        "みりん"
+      ],
+      "steps": [
+        "油を少し引いて鶏肉を軽く炒める",
+        "他の具材と調味料を入れて、汁気が無くなるまで炒め煮する"
+      ],
+      "memo": "_No response_",
+      "created_at": "2026-10-02"
     }
   ]
 }
