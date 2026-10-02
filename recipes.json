@@ -487,6 +487,31 @@
       ],
       "memo": "_No response_",
       "created_at": "2026-10-02"
+    },
+    {
+      "id": "pokuchappu",
+      "title": "ポークチャップ",
+      "category": "main_dish",
+      "image": "images/main_dish/pokuchappu-20261002.webp",
+      "ingredients": [
+        "豚肉",
+        "玉ねぎ",
+        "ピーマン",
+        "にんじん"
+      ],
+      "seasonings": [
+        "ケチャップ",
+        "醤油",
+        "マヨネーズ",
+        "みりん",
+        "塩胡椒"
+      ],
+      "steps": [
+        "ナポリタンの要領で具材を炒めて調味料を加える",
+        "マヨネーズは最後に火を消してから少量加えて余熱で和える"
+      ],
+      "memo": "マヨネーズはコクだし用\nにんにくを入れてもいい",
+      "created_at": "2026-10-02"
     }
   ]
 }
