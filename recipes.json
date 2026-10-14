@@ -557,6 +557,34 @@
       ],
       "memo": "_No response_",
       "created_at": "2026-10-02"
+    },
+    {
+      "id": "niratamaenoki",
+      "title": "ニラ玉えのきあんかけ",
+      "category": "main_dish",
+      "image": "images/main_dish/niratamaenoki-20261014.webp",
+      "ingredients": [
+        "ニラ",
+        "たまご",
+        "玉ねぎ",
+        "カニカマ",
+        "えのき"
+      ],
+      "seasonings": [
+        "鶏ガラ",
+        "醤油",
+        "砂糖",
+        "酒",
+        "塩",
+        "胡椒",
+        "片栗粉"
+      ],
+      "steps": [
+        "エノキ以外の具材を混ぜて塩と醤油を少し入れてお好み状に焼く",
+        "えのきと調味料で餡をつくってかける"
+      ],
+      "memo": "_No response_",
+      "created_at": "2026-10-14"
     }
   ]
 }
