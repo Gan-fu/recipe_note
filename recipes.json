@@ -606,6 +606,32 @@
       ],
       "memo": "_No response_",
       "created_at": "2026-10-14"
+    },
+    {
+      "id": "amakaragomani",
+      "title": "鶏とごぼうの甘辛胡麻煮",
+      "category": "main_dish",
+      "image": "images/main_dish/amakaragomani-20261014.webp",
+      "ingredients": [
+        "鶏もも肉",
+        "ごぼう",
+        "こんにゃく"
+      ],
+      "seasonings": [
+        "醤油",
+        "酒",
+        "みりん",
+        "砂糖",
+        "すりごま",
+        "ごま油",
+        "輪切り唐辛子"
+      ],
+      "steps": [
+        "具材を醤油、酒、みりん、砂糖で炒め煮する",
+        "すりごま、ごま油、唐辛子で仕上げる"
+      ],
+      "memo": "山口県の郷土料理「チキンチキンごぼう」のアレンジ料理",
+      "created_at": "2026-10-14"
     }
   ]
 }
