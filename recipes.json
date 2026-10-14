@@ -585,6 +585,27 @@
       ],
       "memo": "_No response_",
       "created_at": "2026-10-14"
+    },
+    {
+      "id": "jakoipame",
+      "title": "小松菜と厚揚げのじゃこ炒め",
+      "category": "main_dish",
+      "image": "images/main_dish/jakoipame-20261014.webp",
+      "ingredients": [
+        "小松菜",
+        "厚揚げ",
+        "ちりめんじゃこの佃煮",
+        "（舞茸）"
+      ],
+      "seasonings": [
+        "めんつゆ",
+        "醤油"
+      ],
+      "steps": [
+        "炒める"
+      ],
+      "memo": "_No response_",
+      "created_at": "2026-10-14"
     }
   ]
 }
